@@ -292,7 +292,7 @@ file_folder1<-"path to TCGA clinical and somatic data folder"
 file_path2<-paste(file_folder1,"COAD&READ","clinical/clinical.tsv",sep="/");stopifnot(file.exists(file_path2))
 file_path3<-paste(file_folder1,"COAD&READ","CNV",sep="/");length(dir(file_path3))==681
 files1<-dir(paste(file_folder1,"COAD&READ",sep="/"))
-files1<-files1[str_detect(files1,"gdc_sample_sheet")];length(files1)==1
+files1<-files1[str_detect(files1,"gdc_sample_sheet")];stopifnot(length(files1)==1)
 file_path4<-paste(file_folder1,"COAD&READ",files1,sep="/")
 if(T){
   tcga_cl<-fread(file_path2)
@@ -833,6 +833,7 @@ if(T){
     }
     ###We need this package to perform the Barnard's exact test
     remotes::install_github("limintao-pku/BNDtest")
+    library(BNDtest)
   }
   if(T){
     gene_list<-list(
